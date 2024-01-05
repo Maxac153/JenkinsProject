@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+    stages {
+        stage('Hello World') {
+            steps {
+                sh '''
+                    ls -a
+                    pyinstaller -w -F main.py
+                    chmod 777 ./dist/main
+                '''
+            }
+        }
+    }
+}
