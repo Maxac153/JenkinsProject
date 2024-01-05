@@ -4,6 +4,13 @@ pipeline {
     agent any
     triggers { pollSCM('* * * * *') }
     stages {
+        stage('Testing the project') {
+            steps {
+                sh '''
+                    python -m pytest
+                '''
+            }
+        }
         stage('Image creation') {
             steps {
                 sh '''
