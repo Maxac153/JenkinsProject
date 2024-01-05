@@ -1,7 +1,7 @@
 #!groovy
 
 pipeline {
-    agent any
+    agent none
     triggers { pollSCM('* * * * *') }
     stages {
         stage('Tests') {
@@ -12,12 +12,24 @@ pipeline {
                 '''
             }
         }
-        stage('Image creation') {
-            steps {
-                echo "=========== IMAGE CREATION (LINUX) ==========="
-                sh '''
-                    pyinstaller -w -F main.py
-                '''
+
+        stage('Images creation') {
+            parallel {
+                stage('Image creation (linux)') {
+                    steps {
+                        echo "=========== IMAGE CREATION (LINUX) ==========="
+                        sh '''
+                            pyinstaller -w -F main.py
+                        '''
+                    }
+                }
+
+                stage('Image creation (win)') {
+                    steps {
+                        echo "=========== IMAGE CREATION (WINDOWS) ==========="
+                        echo "Ну представим, что собрали под windows (агента нет)"
+                    }
+                }
             }
         }
     }
