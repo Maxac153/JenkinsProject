@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Tests') {
             steps {
+                echo "=========== TESTS ==========="
                 sh '''
                     python3 -m pytest
                 '''
@@ -13,6 +14,7 @@ pipeline {
         }
         stage('Image creation') {
             steps {
+                echo "=========== IMAGE CREATION (LINUX) ==========="
                 sh '''
                     pyinstaller -w -F main.py
                 '''
