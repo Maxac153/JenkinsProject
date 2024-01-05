@@ -5,3 +5,7 @@
 /.idea/modules.xml
 /.idea/misc.xml
 /.idea
+/main.spec
+/build
+/dist
+/build/
