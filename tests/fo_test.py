@@ -4,4 +4,4 @@ def fo(number_one: int, number_two: int):
 
 def test_fo():
     assert fo(10, 5) == 15.0
-    assert fo(10, 5) == 10.0
+    assert fo(5, 5) == 10.0
