@@ -2,8 +2,9 @@
 
 pipeline {
     agent any
+    triggers { pollSCM('*****') }
     stages {
-        stage('Hello World') {
+        stage('Image creation') {
             steps {
                 sh '''
                     ls -a
