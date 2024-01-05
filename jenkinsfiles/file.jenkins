@@ -7,9 +7,7 @@ pipeline {
         stage('Image creation') {
             steps {
                 sh '''
-                    ls -a
                     pyinstaller -w -F main.py
-                    chmod 777 ./dist/main
                 '''
             }
         }
