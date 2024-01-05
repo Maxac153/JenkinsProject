@@ -5,7 +5,6 @@ pipeline {
     triggers { pollSCM('* * * * *') }
     stages {
         stage('Tests') {
-            agent none
             steps {
                 echo "=========== TESTS ==========="
                 sh '''
@@ -17,7 +16,6 @@ pipeline {
         stage('Images creation') {
             parallel {
                 stage('Image creation (linux)') {
-                    agent none
                     steps {
                         echo "=========== IMAGE CREATION (LINUX) ==========="
                         sh '''
@@ -27,7 +25,6 @@ pipeline {
                 }
 
                 stage('Image creation (win)') {
-                    agent none
                     steps {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
