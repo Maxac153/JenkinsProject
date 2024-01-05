@@ -4,7 +4,7 @@ pipeline {
     agent any
     triggers { pollSCM('* * * * *') }
     stages {
-        stage('Testing the project') {
+        stage('Tests') {
             steps {
                 sh '''
                     python3 -m pytest
