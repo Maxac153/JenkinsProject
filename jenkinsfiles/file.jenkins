@@ -39,8 +39,9 @@ pipeline {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
                         sh '''
-                            directory="./win"
+                            pyinstaller -w -F main.py
 
+                            directory="./win"
                             if [ -d "$directory" ]; then
                               echo "Папка существует"
                             else
@@ -60,7 +61,10 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true
             archiveArtifacts artifacts: 'win/*', allowEmptyArchive: true
-
+            sh '''
+                rm -rf ./linux
+                rm -rf ./win
+            '''
         }
     }
 }
