@@ -20,9 +20,12 @@ pipeline {
                         echo "=========== IMAGE CREATION (LINUX) ==========="
                         sh '''
                             pyinstaller -w -F main.py
-
-                            mv ./dist/main ./linux
                         '''
+                    }
+                    steps {
+                        dir('linux') {
+                            fileCopy(source: 'dist/main', destination: 'linux')
+                        }
                     }
                 }
 
@@ -30,9 +33,6 @@ pipeline {
                     steps {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
-                        sh '''
-
-                        '''
                     }
                 }
             }
@@ -41,8 +41,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: './linux', allowEmptyArchive: true
-            archiveArtifacts artifacts: './win', allowEmptyArchive: true
+            archiveArtifacts artifacts: './linux/*', allowEmptyArchive: true
         }
     }
 }
