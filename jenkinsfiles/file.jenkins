@@ -19,7 +19,7 @@ pipeline {
                     steps {
                         echo "=========== IMAGE CREATION (LINUX) ==========="
                         sh '''
-                            pyinstaller -w -F main.py
+                            pyinstaller -w -F main.py --distpath "/linux"
 
                             directory="./linux"
                             if [ -d "$directory" ]; then
@@ -39,6 +39,8 @@ pipeline {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
                         sh '''
+                            pyinstaller -w -F main.py --distpath "/win"
+
                             directory="./win"
                             if [ -d "$directory" ]; then
                               echo "Папка существует"
@@ -47,7 +49,7 @@ pipeline {
                               echo "Папка создана"
                             fi
 
-                            cp ./dist/main win
+                            pyinstaller -w -F main.py -D "/win"
                         '''
                     }
                 }
