@@ -35,6 +35,17 @@ pipeline {
                 }
             }
         }
+
+        stage('Create Directory and Move File') {
+            steps {
+                script {
+                    dir('linux') {
+                        // Create the folder if it doesn't exist
+                        fileCopy(source: 'dist/main', destination: 'linux')
+                    }
+                }
+            }
+        }
     }
 
     post {
