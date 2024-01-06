@@ -20,7 +20,6 @@ pipeline {
                         echo "=========== IMAGE CREATION (LINUX) ==========="
                         sh '''
                             pyinstaller -w -F main.py
-                            mkdir linux
                         '''
                     }
                 }
@@ -30,7 +29,7 @@ pipeline {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
                         sh '''
-                            mkdir win
+
                         '''
                     }
                 }
