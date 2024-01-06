@@ -41,8 +41,8 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true, name: 'linux-${env.BUILD_NUMBER}'
-            archiveArtifacts artifacts: 'win/*', allowEmptyArchive: true, name: 'win-${env.BUILD_NUMBER}'
+            archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true, name: "linux-${env.BUILD_NUMBER}"
+            archiveArtifacts artifacts: 'win/*', allowEmptyArchive: true, name: "win-${env.BUILD_NUMBER}"
         }
     }
 }
