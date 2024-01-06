@@ -21,8 +21,11 @@ pipeline {
                         sh '''
                             pyinstaller -w -F main.py
                         '''
+                    }
+                    steps {
                         script {
                             dir('linux') {
+                                // Create the folder if it doesn't exist
                                 fileCopy(source: 'dist/main', destination: 'linux')
                             }
                         }
