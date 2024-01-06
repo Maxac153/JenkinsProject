@@ -19,7 +19,17 @@ pipeline {
                     steps {
                         echo "=========== IMAGE CREATION (LINUX) ==========="
                         sh '''
-                            pyinstaller -w -F main.py --distpath "/linux"
+                            pyinstaller -w -F main.py
+
+                            directory="./linux"
+                            if [ -d "$directory" ]; then
+                              echo "Папка существует"
+                            else
+                              mkdir -p "$directory"
+                              echo "Папка создана"
+                            fi
+
+                            mv ./dist/main linux
                         '''
                     }
                 }
@@ -42,7 +52,7 @@ pipeline {
             archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true
             archiveArtifacts artifacts: 'win/*', allowEmptyArchive: true
             sh '''
-                rm -rf ./linux
+                rm -rf ./linux ./dist
                 rm -rf ./win
             '''
         }
