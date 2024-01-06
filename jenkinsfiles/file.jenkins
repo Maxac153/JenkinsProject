@@ -4,13 +4,6 @@ pipeline {
     agent any
     triggers { pollSCM('* * * * *') }
     stages {
-        stage('Before tests') {
-            sh '''
-                rm -rf linux
-                rm -rf win
-            '''
-        }
-
         stage('Tests') {
             steps {
                 echo "=========== TESTS ==========="
