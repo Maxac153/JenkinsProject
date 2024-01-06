@@ -6,8 +6,8 @@ pipeline {
     stages {
         stage('Before tests') {
             sh '''
-                rm -rf ./linux
-                rm -rf ./win
+                rm -rf linux
+                rm -rf win
             '''
         }
 
@@ -50,8 +50,8 @@ pipeline {
         always {
             archiveArtifacts artifacts: '**/linux', allowEmptyArchive: true
             archiveArtifacts artifacts: '**/win', allowEmptyArchive: true
-            rm -rf ./linux
-            rm -rf ./win
+            rm -rf linux
+            rm -rf win
         }
     }
 }
