@@ -21,6 +21,14 @@ pipeline {
                         sh '''
                             pyinstaller -w -F main.py
                             mv ./dist/main linux
+
+                            directory="./linux"
+                            if [ -d "$directory" ]; then
+                              echo "Папка существует"
+                            else
+                              mkdir -p "$directory"
+                              echo "Папка создана"
+                            fi
                         '''
                     }
                 }
@@ -42,6 +50,7 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true
             archiveArtifacts artifacts: 'win/*', allowEmptyArchive: true
+
         }
     }
 }
