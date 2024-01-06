@@ -21,8 +21,6 @@ pipeline {
                         sh '''
                             pyinstaller -w -F main.py
                         '''
-                    }
-                    steps {
                         dir('linux') {
                             fileCopy(source: 'dist/main', destination: 'linux')
                         }
