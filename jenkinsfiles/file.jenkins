@@ -22,12 +22,22 @@ pipeline {
                             pyinstaller -w -F main.py
                         '''
                     }
+                    steps {
+                        sh '''
+                            mkdir linux
+                        '''
+                    }
                 }
 
                 stage('Image creation (win)') {
                     steps {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
+                    }
+                    steps {
+                        sh '''
+                            mkdir win
+                        '''
                     }
                 }
             }
