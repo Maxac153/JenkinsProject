@@ -22,20 +22,25 @@ pipeline {
                             pyinstaller -w -F main.py
                         '''
                     }
-                    steps {
-                        script {
-                            dir('linux') {
-                                // Create the folder if it doesn't exist
-                                fileCopy(source: 'dist/main', destination: 'linux')
-                            }
-                        }
-                    }
                 }
 
                 stage('Image creation (win)') {
                     steps {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
+                    }
+                }
+            }
+        }
+
+        stages {
+            stage('Create Directory and Move File') {
+                steps {
+                    script {
+                        dir('linux') {
+                            // Create the folder if it doesn't exist
+                            fileCopy(source: 'dist/main', destination: 'linux')
+                        }
                     }
                 }
             }
