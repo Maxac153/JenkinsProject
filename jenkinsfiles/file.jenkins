@@ -43,8 +43,6 @@ pipeline {
         always {
             archiveArtifacts artifacts: '**/linux', allowEmptyArchive: true
             archiveArtifacts artifacts: '**/win', allowEmptyArchive: true
-            deleteDir(dir: 'linux')
-            deleteDir(dir: 'win')
         }
     }
 }
