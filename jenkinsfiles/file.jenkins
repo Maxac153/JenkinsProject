@@ -4,6 +4,13 @@ pipeline {
     agent any
     triggers { pollSCM('* * * * *') }
     stages {
+        stage('Before tests') {
+            sh '''
+                rm -rf ./linux
+                rm -rf ./win
+            '''
+        }
+
         stage('Tests') {
             steps {
                 echo "=========== TESTS ==========="
@@ -20,6 +27,8 @@ pipeline {
                         echo "=========== IMAGE CREATION (LINUX) ==========="
                         sh '''
                             pyinstaller -w -F main.py
+                            mkdir linux
+                            mv ./dist/main ./linux
                         '''
                     }
                 }
@@ -29,16 +38,20 @@ pipeline {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
                         sh '''
-
+                            mkdir win
                         '''
                     }
                 }
             }
         }
     }
+
     post {
         always {
-            archiveArtifacts artifacts: '**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/linux', allowEmptyArchive: true
+            archiveArtifacts artifacts: '**/win', allowEmptyArchive: true
+            rm -rf ./linux
+            rm -rf ./win
         }
     }
 }
