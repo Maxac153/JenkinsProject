@@ -28,19 +28,9 @@ pipeline {
                     steps {
                         echo "=========== IMAGE CREATION (WINDOWS) ==========="
                         echo "Ну представим, что собрали под windows (агента нет)"
-                    }
-                }
-            }
-        }
+                        sh '''
 
-        stages {
-            stage('Create Directory and Move File') {
-                steps {
-                    script {
-                        dir('linux') {
-                            // Create the folder if it doesn't exist
-                            fileCopy(source: 'dist/main', destination: 'linux')
-                        }
+                        '''
                     }
                 }
             }
@@ -49,7 +39,8 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'linux', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'win', allowEmptyArchive: true
         }
     }
 }
