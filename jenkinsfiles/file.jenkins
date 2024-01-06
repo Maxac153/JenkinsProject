@@ -35,13 +35,12 @@ pipeline {
                 }
             }
         }
-
-
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true, onlyIfSuccessful: true, fingerprint: true, name: "linux-${env.BUILD_NUMBER}"
+            archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'win/*', allowEmptyArchive: true
         }
     }
 }
