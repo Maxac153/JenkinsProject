@@ -21,8 +21,10 @@ pipeline {
                         sh '''
                             pyinstaller -w -F main.py
                         '''
-                        dir('linux') {
-                            fileCopy(source: 'dist/main', destination: 'linux')
+                        script {
+                            dir('linux') {
+                                fileCopy(source: 'dist/main', destination: 'linux')
+                            }
                         }
                     }
                 }
@@ -39,7 +41,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: './linux/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'linux/*', allowEmptyArchive: true
         }
     }
 }
